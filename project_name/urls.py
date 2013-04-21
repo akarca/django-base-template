@@ -12,20 +12,21 @@ def bad(request):
     1 / 0
 
 urlpatterns = patterns('',
-    url(r'', include('base.urls')),
-    url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
-    url(r'^admin/$', admin.site.admin_view(admin.site.index)),
-    url(r'^admin/', include(admin.site.urls)),
-    #url(r'^', include('debug_toolbar_user_panel.urls')),
-    url(r'^bad/$', bad),
-)
+                       # url(r'', include('base.urls')),
+                       url(r'^$', '{{ project_name }}.views.home', name='home'),
+                       url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
+                       url(r'^admin/$', admin.site.admin_view(admin.site.index)),
+                       url(r'^admin/', include(admin.site.urls)),
+                       # url(r'^', include('debug_toolbar_user_panel.urls')),
+                       url(r'^bad/$', bad),
+                       )
 
-## In DEBUG mode, serve media files through Django.
+# In DEBUG mode, serve media files through Django.
 if settings.DEBUG:
     urlpatterns += staticfiles_urlpatterns()
     # Remove leading and trailing slashes so the regex matches.
     media_url = settings.MEDIA_URL.lstrip('/').rstrip('/')
     urlpatterns += patterns('',
-        (r'^%s/(?P<path>.*)$' % media_url, 'django.views.static.serve',
-         {'document_root': settings.MEDIA_ROOT}),
-    )
+                           (r'^%s/(?P<path>.*)$' % media_url, 'django.views.static.serve',
+                            {'document_root': settings.MEDIA_ROOT}),
+                            )

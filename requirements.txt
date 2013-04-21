@@ -1,3 +1,72 @@
-# This file is here because many Platforms as a Service look for
-# requirements.txt in the root directory of a project.
--r requirements/production.txt
+# Choose your databases adapter
+# psycopg2
+# MySQL-python
+
+# sudo apt-get install build-essential python-dev
+
+
+# for bcrypt passwords
+py-bcrypt
+
+# Deployment
+Fabric
+
+# Documentation
+Sphinx
+
+# Testing
+nose
+mock
+django-nose
+coverage
+pep8
+pylint
+django-discover-runner
+
+# Django stuff
+Django>=1.5
+
+# Templates
+Markdown
+django_compressor
+
+# Security
+bleach
+#cef
+
+# Logging
+#raven
+
+# Celery: Message queue
+celery
+django-celery
+
+# L10n/i18n
+#Babel
+#-e git://github.com/clouserw/tower.git#egg=tower
+
+# Caching
+python-memcached
+
+# Admin
+django-debug-toolbar
+# There are useful panels for debug-toolbar, but have not quite been updated yet for 1.5
+#-e git://github.com/playfire/django-debug-toolbar-user-panel#egg=django_debug_toolbar_user_panel-dev
+
+# Migrations
+South
+
+# Feature testing
+#django-waffle
+
+# Various tidbits
+commonware
+-e git://github.com/mozilla/nuggets.git#egg=nuggets
+
+easy-thumbnails
+-e git+git@github.com:serdarakarca/django-categories.git#egg=django-categories
+django-extensions
+django-admin-sortable
+django-storages
+boto
+pylibmc

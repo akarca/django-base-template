@@ -4,6 +4,7 @@ repo. If you need to override a setting locally, use local.py
 """
 
 import os
+import sys
 import logging
 
 # Normally you should not import ANYTHING from Django directly
@@ -22,6 +23,8 @@ def get_env_setting(setting):
 
 # Your project root
 PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__) + "../../../")
+
+sys.path.insert(0, os.path.join(PROJECT_ROOT, "apps"))
 
 SUPPORTED_NONLOCALES = ['media', 'admin', 'static']
 
@@ -52,8 +55,12 @@ INSTALLED_APPS = (
     # Third-party apps, patches, fixes
     'commonware.response.cookies',
     'djcelery',
-    'debug_toolbar',
     'compressor',
+    'easy_thumbnails',
+    'categories',
+    'categories.editor',
+    'adminsortable',
+    'storages',
     #'debug_toolbar_user_panel',
 
     # Database migrations
@@ -61,6 +68,7 @@ INSTALLED_APPS = (
 
     # Application base, containing global templates.
     'base',
+    'account',
 
     # Local apps, referenced via appname
 )
@@ -126,7 +134,7 @@ USE_TZ = True
 # although not all choices may be available on all operating systems.
 # If running in a Windows environment this must be set to the same as your
 # system time zone.
-TIME_ZONE = 'America/Los_Angeles'
+TIME_ZONE = 'Europe/Istanbul'
 
 # List of finder classes that know how to find static files in
 # various locations.
@@ -145,7 +153,6 @@ MIDDLEWARE_CLASSES = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'commonware.middleware.FrameOptionsHeader',
-    'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
 
 TEMPLATE_CONTEXT_PROCESSORS = [
@@ -203,41 +210,19 @@ DEBUG_TOOLBAR_PANELS = (
 )
 
 # Specify a custom user model to use
-#AUTH_USER_MODEL = 'accounts.MyUser'
+AUTH_USER_MODEL = 'account.CustomUser'
 
 FILE_UPLOAD_PERMISSIONS = 0664
 
 # The WSGI Application to use for runserver
 WSGI_APPLICATION = '{{ project_name }}.wsgi.application'
 
-# Define your database connections
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.',
-        'NAME': '',
-        'USER': '',
-        'PASSWORD': '',
-        'HOST': '',
-        'PORT': '',
-        #'OPTIONS': {
-        #    'init_command': 'SET storage_engine=InnoDB',
-        #    'charset' : 'utf8',
-        #    'use_unicode' : True,
-        #},
-        #'TEST_CHARSET': 'utf8',
-        #'TEST_COLLATION': 'utf8_general_ci',
-    },
-    # 'slave': {
-    #     ...
-    # },
-}
-
 # Uncomment this and set to all slave DBs in use on the site.
 # SLAVE_DATABASES = ['slave']
 
 # Recipients of traceback emails and other notifications.
 ADMINS = (
-    # ('Your Name', 'your_email@domain.com'),
+    ('Serdar Akarca', 'serdar@yuix.org'),
 )
 MANAGERS = ADMINS
 
@@ -252,14 +237,7 @@ DEV = False
 
 # Hosts/domain names that are valid for this site; required if DEBUG is False
 # See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
-ALLOWED_HOSTS = []
-
-# SECURITY WARNING: keep the secret key used in production secret!
-# Hardcoded values can leak through source control.
-# This is an example method of getting the value from an environment setting.
-# Uncomment to use, and then make sure you set the SECRET_KEY environment variable.
-# This is good to use in production, and on services that support it such as Heroku.
-#SECRET_KEY = get_env_setting('SECRET_KEY')
+ALLOWED_HOSTS = ['localhost', 'l']
 
 # Uncomment these to activate and customize Celery:
 # CELERY_ALWAYS_EAGER = False  # required to activate celeryd
@@ -273,17 +251,17 @@ ALLOWED_HOSTS = []
 INTERNAL_IPS = ('127.0.0.1')
 
 # Enable these options for memcached
-#CACHE_BACKEND= "memcached://127.0.0.1:11211/"
-#CACHE_MIDDLEWARE_ANONYMOUS_ONLY=True
+# CACHE_BACKEND= "memcached://127.0.0.1:11211/"
+# CACHE_MIDDLEWARE_ANONYMOUS_ONLY=True
 
 # Set this to true if you use a proxy that sets X-Forwarded-Host
-#USE_X_FORWARDED_HOST = False
+# USE_X_FORWARDED_HOST = False
 
 SERVER_EMAIL = "webmaster@example.com"
 DEFAULT_FROM_EMAIL = "webmaster@example.com"
 SYSTEM_EMAIL_PREFIX = "[{{ project_name }}]"
 
-## Log settings
+# Log settings
 
 LOG_LEVEL = logging.INFO
 HAS_SYSLOG = True
@@ -300,7 +278,48 @@ LOGGING = {
 }
 
 # Common Event Format logging parameters
-#CEF_PRODUCT = '{{ project_name }}'
-#CEF_VENDOR = 'Your Company'
-#CEF_VERSION = '0'
-#CEF_DEVICE_VERSION = '0'
+CEF_PRODUCT = '{{ project_name }}'
+CEF_VENDOR = 'Your Company'
+CEF_VERSION = '0'
+CEF_DEVICE_VERSION = '0'
+
+THUMBNAIL_ALIASES = {
+    '': {
+        #'banner': {'size': (795, 192), 'crop': True, 'upscale': True, 'autocrop': False},
+    },
+}
+
+# DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+
+THUMBNAIL_DEFAULT_STORAGE = DEFAULT_FILE_STORAGE
+
+AWS_ACCESS_KEY_ID = "key id"
+# Your Amazon Web Services access key, as a string.
+
+AWS_SECRET_ACCESS_KEY = "access key"
+
+# Your Amazon Web Services secret access key, as a string.
+
+AWS_STORAGE_BUCKET_NAME = "bucketname"
+
+# Your Amazon Web Services storage bucket name, as a string.
+
+AWS_CALLING_FORMAT = "s3 address"
+
+# STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+
+THUMBNAIL_PROCESSORS = (
+    'easy_thumbnails.processors.colorspace',
+    'easy_thumbnails.processors.autocrop',
+    'easy_thumbnails.processors.scale_and_crop',
+    'easy_thumbnails.processors.filters',
+)
+
+THUMBNAIL_SOURCE_GENERATORS = (
+    'easy_thumbnails.source_generators.pil_image',
+)
+THUMBNAIL_QUALITY = 85
+
+THUMBNAIL_EXTENSION = 'jpg'
+THUMBNAIL_TRANSPARENCY_EXTENSION = 'png'
+THUMBNAIL_PRESERVE_EXTENSIONS = ('png',)
