@@ -1,4 +1,3 @@
-{% if False %}
 # Django 1.5 Base Template #
 
 ## About ##
@@ -8,7 +7,7 @@ This template is based off of the work of [Mozilla Playdoh][playdoh] and
 layouts/project templates. Playdoh is mainly setup for Mozilla's systems, and is
 currently only designed for Django 1.4.
 
-This project template is designed for Django 1.4's new startproject template option. This version of the project template is designed for Django 1.5.
+This version of the project template is designed for Django 1.5.
 
 As much as I could, all the code has been updated to use the new suggested layout
 and functionality in Django 1.5.
@@ -19,9 +18,6 @@ and functionality in Django 1.5.
 ## Features ##
 
 By default, this project template includes:
-
-A set of basic templates built from HTML5Boilerplate 4.1.0 and Twitter Bootstrap 2.3.1 (located in the
-base app)
 
 Templating:
 
@@ -49,6 +45,10 @@ From Mozilla Playdoh:
 
 - commonware
 - nuggets
+
+User Model:
+
+- Custom user model without 'username' field.
 
 Admin:
 
@@ -81,7 +81,6 @@ There isn't a need to add settings/local.py to your source control, but there ar
 
 The second school of thought is that all settings should be versioned, so that as much of the code/settings as possible is the same across all developers and test/production servers. If you prefer this method, then make sure *all* necessary settings are properly set in settings/base.py, and then edit settings/__init__.py so it no longer reraises the exception. (ie, by replacing 'raise' with 'pass'). As it is, settings/local.py should only be overriding settings from settings/base.py anyway. (You could also just set the DJANGO_SETTINGS_MODULE environment variable to "{{ project_name }}.settings.base" directly.)
 
-{% endif %}
 # The {{ project_name|title }} Project #
 
 ## About ##
