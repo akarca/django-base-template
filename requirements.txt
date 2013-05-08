@@ -53,6 +53,8 @@ django-debug-toolbar
 # There are useful panels for debug-toolbar, but have not quite been updated yet for 1.5
 #-e git://github.com/playfire/django-debug-toolbar-user-panel#egg=django_debug_toolbar_user_panel-dev
 
+-e git+https://bitbucket.org/serdarakarca/django-registration#egg=django-registration
+
 # Migrations
 South
 
@@ -70,3 +72,4 @@ django-admin-sortable
 django-storages
 boto
 pylibmc
+PIL

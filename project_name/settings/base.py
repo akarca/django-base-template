@@ -61,6 +61,7 @@ INSTALLED_APPS = (
     'categories.editor',
     'adminsortable',
     'storages',
+    'django_autoslug',
     #'debug_toolbar_user_panel',
 
     # Database migrations
