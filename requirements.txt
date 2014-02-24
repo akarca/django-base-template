@@ -12,22 +12,22 @@ py-bcrypt
 Fabric
 
 # Documentation
-Sphinx
+# Sphinx
 
 # Testing
-nose
-mock
-django-nose
-coverage
-pep8
-pylint
-django-discover-runner
+#nose
+#mock
+#django-nose
+#coverage
+#pep8
+#pylint
+#django-discover-runner
 
 # Django stuff
-Django>=1.5
+Django
 
 # Templates
-Markdown
+#Markdown
 django_compressor
 
 # Security
@@ -35,7 +35,7 @@ bleach
 #cef
 
 # Logging
-#raven
+raven
 
 # Celery: Message queue
 celery

@@ -1,16 +1,16 @@
-# Django 1.5 Base Template #
+# Django 1.6 Base Template #
 
 ## About ##
 
 This template is based off of the work of [Mozilla Playdoh][playdoh] and
 [Two Scoops of Django][twoscoops], as well as experience with other Django
 layouts/project templates. Playdoh is mainly setup for Mozilla's systems, and is
-currently only designed for Django 1.4.
+currently only designed for Django 1.6.
 
-This version of the project template is designed for Django 1.5.
+This version of the project template is designed for Django 1.6.
 
 As much as I could, all the code has been updated to use the new suggested layout
-and functionality in Django 1.5.
+and functionality in Django 1.6.
 
 [playdoh]: https://github.com/mozilla/playdoh
 [twoscoops]: https://github.com/twoscoops/django-twoscoops-project
@@ -53,7 +53,7 @@ User Model:
 Admin:
 
 - Includes django-admin-toolbar for development and production (enabled for superusers)
-- Includes django-debug-toolbar-user-panel, which is quite useful, but is disabled until it fully supports Django 1.5
+- Includes django-debug-toolbar-user-panel, which is quite useful, but is disabled until it fully supports Django 1.6
 
 Testing:
 
@@ -65,7 +65,7 @@ Any of these options can added, modified, or removed as you like after creating 
 ## How to use this project template to create your project ##
 
 - Create your working environment and virtualenv
-- Install Django 1.5 ($ pip install Django>=1.5)
+- Install Django 1.6 ($ pip install Django>=1.6)
 - $ django-admin.py startproject --template https://github.com/serdarakarca/django-base-template/zipball/master --extension py,md,rst projectname
 - $ cd projectname
 - Uncomment your preferred database adapter in requirements/compiled.txt (MySQL, Postgresql, or skip this step to stick with SQLite)
