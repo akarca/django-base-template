@@ -196,7 +196,6 @@ def sshagent_run(cmd):
         )
 
 
-@task
 def deploy():
     """
     Deploy the project.
